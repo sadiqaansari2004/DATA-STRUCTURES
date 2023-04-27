@@ -1,31 +1,30 @@
-// program to find last index of a given integer
+// program to find last occurance index of given integer
 #include<iostream>
 using namespace std;
 
-int index(int a[], int size, int x){
-    static int count=0;
+int last_index(int a[], int size, int key)
+{
+    static int count=size-1;
     if(size==0)
-        return -1;
-    if((*a)==x)
-        count++;
-    if(size==1)
-        return count;
-    return index(a+1, size-1, x);
+    return -1;
+    if(a[size-1]==key)
+    return count;
+    count--;
+    return last_index(a, size-1, key);
 }
-int main(){
-    int a[50], n, x, ind;
+int main()
+{
+    int a[40], n, key;
     cout<<"Enter the size of the array:"<<endl;
     cin>>n;
-    cout<<"Enter the elements of array:"<<endl;
-    for(int i=0; i<n; i++){
+    cout<<"Enter the elements of the array:"<<endl;
+    for(int i=0; i<n; i++)
         cin>>a[i];
-    }
-    cout<<"Enter the search element:"<<endl;
-    cin>>x;
-    ind=index(a, n, x);
-    if(ind==-1)
-        cout<<x<<" is not present in the list!!\n";
+    cout<<"Enter the integer to be searched:"<<endl;
+    cin>>key;
+    int output=last_index(a, n, key);
+    if(output>=0)
+    cout<<key<<"'s last occurance is at index "<<output<<endl;
     else
-        cout<<"The last index of "<<x<<" is "<<ind<<endl;
-    return 0;
+    cout<<key<<" is not present in the array"<<endl;
 }
